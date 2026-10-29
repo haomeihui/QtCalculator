@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>360</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>计算器 - Qt实验1</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget#centralwidget {
+    background-color: #F2F3F5;
+}
+QFrame#displayFrame {
+    background-color: #FFFFFF;
+    border: 1px solid #E3E5E8;
+    border-radius: 14px;
+}
+QLabel#lblExpression {
+    color: #8A8F99;
+    font-size: 15px;
+    font-family: &quot;Consolas&quot;;
+    padding-right: 6px;
+}
+QLabel#lcdDisplay {
+    color: #1A1A1A;
+    font-size: 34px;
+    font-weight: 600;
+    font-family: &quot;Consolas&quot;;
+    padding-right: 4px;
+}
+QPushButton {
+    background-color: #FFFFFF;
+    color: #1A1A1A;
+    border: 1px solid #E3E5E8;
+    border-radius: 12px;
+    font-size: 20px;
+    font-family: &quot;Microsoft YaHei&quot;;
+}
+QPushButton:hover {
+    background-color: #F7F8FA;
+}
+QPushButton:pressed, QPushButton[keyPressed=&quot;true&quot;] {
+    background-color: #DCE3EC;
+    border: 1px solid #B9C4D2;
+}
+QPushButton#btnClearAll, QPushButton#btnClearEntry, QPushButton#btnBackspace,
+QPushButton#btnSign, QPushButton#btnPercent {
+    background-color: #E8EAEE;
+    color: #3C4149;
+    font-size: 18px;
+}
+QPushButton#btnClearAll:hover, QPushButton#btnClearEntry:hover,
+QPushButton#btnBackspace:hover, QPushButton#btnSign:hover,
+QPushButton#btnPercent:hover {
+    background-color: #DDE0E6;
+}
+QPushButton#btnEquals {
+    background-color: #2F6FED;
+    color: #FFFFFF;
+    font-size: 24px;
+    border: 1px solid #2F6FED;
+}
+QPushButton#btnEquals:hover {
+    background-color: #4680F2;
+}
+QPushButton#btnEquals:pressed, QPushButton#btnEquals[keyPressed=&quot;true&quot;] {
+    background-color: #2559C4;
+}
+QPushButton#opAdd, QPushButton#opSub, QPushButton#opMul, QPushButton#opDiv {
+    background-color: #EDF3FF;
+    color: #2F6FED;
+    font-size: 22px;
+    border: 1px solid #D7E3FB;
+}
+QPushButton#opAdd:hover, QPushButton#opSub:hover,
+QPushButton#opMul:hover, QPushButton#opDiv:hover {
+    background-color: #E2EBFF;
+}
+QPushButton#opAdd[active=&quot;true&quot;], QPushButton#opSub[active=&quot;true&quot;],
+QPushButton#opMul[active=&quot;true&quot;], QPushButton#opDiv[active=&quot;true&quot;] {
+    background-color: #2F6FED;
+    color: #FFFFFF;
+    border: 1px solid #2F6FED;
+}
+QStatusBar {
+    color: #8A8F99;
+    font-size: 11px;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayoutMain">
+    <property name="spacing">
+     <number>12</number>
+    </property>
+    <property name="leftMargin">
+     <number>14</number>
+    </property>
+    <property name="topMargin">
+     <number>14</number>
+    </property>
+    <property name="rightMargin">
+     <number>14</number>
+    </property>
+    <property name="bottomMargin">
+     <number>14</number>
+    </property>
+    <item>
+     <widget class="QFrame" name="displayFrame">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>120</height>
+       </size>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayoutDisplay">
+       <property name="spacing">
+        <number>4</number>
+       </property>
+       <property name="leftMargin">
+        <number>16</number>
+       </property>
+       <property name="topMargin">
+        <number>12</number>
+       </property>
+       <property name="rightMargin">
+        <number>16</number>
+       </property>
+       <property name="bottomMargin">
+        <number>12</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="lblExpression">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>22</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="lcdDisplay">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>56</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::TextSelectableByMouse</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <layout class="QGridLayout" name="gridLayoutKeys">
+      <property name="horizontalSpacing">
+       <number>8</number>
+      </property>
+      <property name="verticalSpacing">
+       <number>8</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QPushButton" name="btnClearAll">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>56</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>C</string>
+        </property>
+        <property name="toolTip">
+         <string>C / Esc：清除全部</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="btnClearEntry">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>56</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>CE</string>
+        </property>
+        <property name="toolTip">
+         <string>CE / E：仅清除当前操作数</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QPushButton" name="btnBackspace">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>56</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>⌫</string>
+        </property>
+        <property name="toolTip">
+         <string>Backspace：退格</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QPushButton" name="opDiv">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>56</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>÷</string>
+        </property>
+        <property name="toolTip">
+         <string>/ 或 ÷：除</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QPushButton" name="btnDigit7">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>56</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>7</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="btnDigit8">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>56</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>8</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QPushButton" name="btnDigit9">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>56</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>9</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QPushButton" name="opMul">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>56</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>×</string>
+        </property>
+        <property name="toolTip">
+         <string>* 或 x：乘</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QPushButton" name="btnDigit4">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>56</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>4</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="btnDigit5">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>56</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>5</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QPushButton" name="btnDigit6">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>56</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>6</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="3">
+       <widget class="QPushButton" name="opSub">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>56</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>−</string>
+        </property>
+        <property name="toolTip">
+         <string>- 或 −：减</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QPushButton" name="btnDigit1">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>56</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>1</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QPushButton" name="btnDigit2">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>56</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>2</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="2">
+       <widget class="QPushButton" name="btnDigit3">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>56</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>3</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="3">
+       <widget class="QPushButton" name="opAdd">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>56</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>+</string>
+        </property>
+        <property name="toolTip">
+         <string>+：加</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QPushButton" name="btnSign">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>56</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>±</string>
+        </property>
+        <property name="toolTip">
+         <string>F9：正负号</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QPushButton" name="btnDigit0">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>56</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="2">
+       <widget class="QPushButton" name="btnDot">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>56</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>.</string>
+        </property>
+        <property name="toolTip">
+         <string>. ：小数点</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="3">
+       <widget class="QPushButton" name="btnEquals">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>56</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>=</string>
+        </property>
+        <property name="toolTip">
+         <string>Enter 或 = ：计算结果</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnPercent">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>34</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>%  百分比</string>
+      </property>
+      <property name="toolTip">
+       <string>% ：转为百分比</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
